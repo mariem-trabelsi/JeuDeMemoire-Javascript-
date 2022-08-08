@@ -1,5 +1,3 @@
-
-
 const divResultat  =document.getElementById("res");
  var tabJeu=[
         [0,0,0,0],
@@ -13,19 +11,25 @@ const divResultat  =document.getElementById("res");
         [5,4,2,6],
         [3,6,8,1]
     ];
-    
+    var oldSelection=[];
+    var nbAffiche=0;
+    var ready=true;
+    var success=0;
 afficherTab();
+
 function afficherTab(){
-   
     var txt="";
     for(var i=0;i<4;i++){
 
         txt+="<div style='text-align:center;'>";
         for(var j=0;j<4;j++){
-            if(tabJeu[i][j]=== 0)
-          txt+= "<button style='border-radius:10px;background:pink;color:white;font-size:larger;height:100px;width:100px;margin:2px 2px'>afficher</button>";
-          else{
-            txt+="<img src='"+getImage(tabJeu[i][j])+"' onClick='verif(\""+i+"-"+j+"\")' style='border-radius:10px;height:100px;width:100px;margin:2px 2px'>"
+          if(tabJeu[i][j] === 0)
+          {
+          txt+= "<button onClick ='verif(\""+i+"-"+j+"\")' style='border-radius:10px;background:pink;color:white;font-size:larger;height:100px;width:100px;margin:2px 2px'>afficher</button>";
+          }
+          else
+          {
+          txt+= "<img src='"+getImage(tabJeu[i][j])+"'  style='border-radius:10px;height:100px;width:100px;margin:2px 2px'>";
           }
         }
         txt+= "</div>";
@@ -42,17 +46,17 @@ case 1: imgTxt+='elephant.png';
 break;
 case 2: imgTxt+='giraffe.png';
 break;
-case 3: imgTxt+='hippo.png'
+case 3: imgTxt+='hippo.png';
 break;
-case 4: imgTxt+='monkey.png'
+case 4: imgTxt+='monkey.png';
 break;
-case 5: imgTxt+='pig.png'
+case 5: imgTxt+='pig.png';
 break;
-case 6: imgTxt+='penguin.png'
+case 6: imgTxt+='penguin.png';
 break;
-case 7: imgTxt+='panda.png'
+case 7: imgTxt+='panda.png';
 break;
-case 8: imgTxt+='parrot.png'
+case 8: imgTxt+='parrot.png';
 break;
 default: console.log('cas non pris en compte!!');
 }
@@ -60,10 +64,48 @@ return imgTxt;
 }
 
 function verif(valeur){
+    if(ready)
+{
+    nbAffiche++;
+
 var ligne   =valeur.substr(0,1);
 var colonne =valeur.substr(2,1);
-alert(ligne+" "+colonne);
 
 tabJeu[ligne][colonne] = tabRes[ligne][colonne];
 afficherTab();
+
+ if(nbAffiche>1){
+    ready=false;
+    setTimeout(()=>{
+        if(tabJeu[ligne][colonne] !== tabRes[oldSelection[0]][oldSelection[1]]){
+            tabJeu[ligne][colonne] = 0;
+            tabJeu [oldSelection[0]][oldSelection[1]] = 0; 
+        }
+        else{
+            success++;
+            // if(success==3){
+            //     alert('3 images sont vraies!!');
+            //     tabJeu=[
+            //         [0,0,0,0],
+            //         [0,0,0,0],
+            //         [0,0,0,0],
+            //         [0,0,0,0]
+            //     ];
+            //     afficherTab();
+            
+            //  }
+        }
+        afficherTab();
+        ready=true;
+        nbAffiche=0;
+        oldSelection=[ligne,colonne];
+
+    },200)
+   
+ }
+ else{
+oldSelection=[ligne,colonne];
+ }
+
+}
 }
