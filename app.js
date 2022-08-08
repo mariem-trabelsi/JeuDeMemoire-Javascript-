@@ -16,21 +16,21 @@ const divResultat  =document.getElementById("res");
     var ready=true;
     var success=0;
    
-    document.getElementById('bttn').addEventListener('click',fct);
+    // document.getElementById('bttn').addEventListener('click',fct);
 
-    function fct(){
-        var a=document.getElementById('nbreFois').value;
-        if(a<=0)
-        {
-            alert('inapproriate entry !') 
-            return -1;
-        } 
-        else
-        {
-            return a;
-        }
+    // function fct(){
+    //     var a=document.getElementById('nbreFois').value;
+    //     if(a<=0)
+    //     {
+    //         alert('inapproriate entry !') 
+    //         return -1;
+    //     } 
+    //     else
+    //     {
+    //         return a;
+    //     }
        
-    }
+    // }
 afficherTab();
 
 function afficherTab(){
@@ -99,7 +99,7 @@ afficherTab();
         }
         else {
             success++;
-            if(success===2){
+            if(success===8){
                 tabJeu=[
                     [0,0,0,0],
                     [0,0,0,0],
@@ -107,7 +107,8 @@ afficherTab();
                     [0,0,0,0]
                 ];
                 afficherTab();
-                
+                alert('Excellent !');
+                // tabRes= generateTabAleatoire();
             }
         }
         afficherTab();
@@ -123,3 +124,28 @@ oldSelection=[ligne,colonne];
  }
 }
 }
+
+// function generateTabAleatoire(){
+//     var tab=[0,0,0,0,0,0,0,0];
+//     for(var i=0;i<8;i++){
+         
+//             let nbre = Math.floor(Math.random()*8)+1;
+//             // if(tab[nbre]) {
+//               //je cherche comment regler ce probleme  
+            
+//                 tab[i]=nbre;
+            
+            
+//     }
+//     for(var i=0;i<8;i++)
+//     {
+//    for(var j=0;j<4;j++){
+//     for(var t=0;t<4;t++)
+//     {
+//         tabResNew[j][t]=tab[i]
+//     }
+//    }
+// }
+// return tabResNew;
+// }
+// console.log();
