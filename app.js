@@ -15,6 +15,22 @@ const divResultat  =document.getElementById("res");
     var nbAffiche=0;
     var ready=true;
     var success=0;
+   
+    document.getElementById('bttn').addEventListener('click',fct);
+
+    function fct(){
+        var a=document.getElementById('nbreFois').value;
+        if(a<=0)
+        {
+            alert('inapproriate entry !') 
+            return -1;
+        } 
+        else
+        {
+            return a;
+        }
+       
+    }
 afficherTab();
 
 function afficherTab(){
@@ -79,33 +95,31 @@ afficherTab();
     setTimeout(()=>{
         if(tabJeu[ligne][colonne] !== tabRes[oldSelection[0]][oldSelection[1]]){
             tabJeu[ligne][colonne] = 0;
-            tabJeu [oldSelection[0]][oldSelection[1]] = 0; 
+            tabJeu [oldSelection[0]][oldSelection[1]] = 0;  
         }
-        else{
+        else {
             success++;
-            // if(success==3){
-            //     alert('3 images sont vraies!!');
-            //     tabJeu=[
-            //         [0,0,0,0],
-            //         [0,0,0,0],
-            //         [0,0,0,0],
-            //         [0,0,0,0]
-            //     ];
-            //     afficherTab();
-            
-            //  }
+            if(success===2){
+                tabJeu=[
+                    [0,0,0,0],
+                    [0,0,0,0],
+                    [0,0,0,0],
+                    [0,0,0,0]
+                ];
+                afficherTab();
+                
+            }
         }
         afficherTab();
         ready=true;
         nbAffiche=0;
         oldSelection=[ligne,colonne];
 
-    },200)
+    },500)
    
  }
  else{
 oldSelection=[ligne,colonne];
  }
-
 }
 }
